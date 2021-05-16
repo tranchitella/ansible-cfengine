@@ -1,10 +1,27 @@
 galaxy_info:
   role_name: cfengine
-  author: CFEngine
+  author: tranchitella
   description: Install CFEngine clients and hub
   company: Northern.tech AS
   license: GPL-3.0-only
   min_ansible_version: 2.1
   galaxy_tags: ["cfengine"]
+
+  platforms:
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+    - name: RedHat
+      versions:
+        - all
+    - name: Fedora
+      versions:
+        - all
+    - name: Suse
+      versions:
+        - all
 
 dependencies: []
