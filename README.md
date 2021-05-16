@@ -4,7 +4,15 @@ The CFEngine ansible role installs [CFEngine](https://cfengine.com) on a host us
 
 ## Requirements
 
-This role requires pip in the Ansible control node.
+This role requires `pip` in the Ansible control node.
+
+## Installation
+
+You can install this role using Ansible Galaxy:
+
+```bash
+$ ansible-galaxy install tranchitella.cfengine
+```
 
 ## Role Variables
 
@@ -16,16 +24,20 @@ This role requires pip in the Ansible control node.
 |`bootstrap`|If set, bootstraps CFEngine from the provided host|No|`""`|
 |`trust_keys`|Comma-separated paths to the keys the hosts should trust|No|`""`|
 
-## Example Playbook
+## Role Usage
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Simple example to install the CFEengine client:
 
-    - hosts: servers
-      roles:
-        - role: "cfengine.cfengine"
-          version: 3.17.0
-          edition: "enterprise"
-          bootstrap: "10.0.0.1"
+```yaml
+- hosts: servers
+  roles:
+    - role: "cfengine.cfengine"
+      version: 3.17.0
+      edition: "enterprise"
+      bootstrap: "10.0.0.1"
+```
+
+You can find a more elaborated example, installing both the hub and a client specifying the policy server's key as trusted, in the [test playbook](tests/playbook.yml).
 
 ## Contributing
 
