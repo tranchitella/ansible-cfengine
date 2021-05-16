@@ -1,0 +1,10 @@
+galaxy_info:
+  role_name: cfengine
+  author: CFEngine
+  description: Install CFEngine clients and hub
+  company: Northern.tech AS
+  license: GPL-3.0-only
+  min_ansible_version: 2.1
+  galaxy_tags: ["cfengine"]
+
+dependencies: []
