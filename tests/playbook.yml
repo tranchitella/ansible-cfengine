@@ -1,0 +1,52 @@
+---
+- hosts: hubs
+  tags:
+   - hubs
+  roles:
+    - role: "../.."
+      version: "3.17.0"
+      edition: "enterprise"
+      package: "hub"
+      bootstrap: "192.168.100.90"
+
+- hosts: hubs
+  tags:
+   - keys
+  tasks:
+    - name: Get the key hash
+      become: true
+      command: "cf-key -p /var/cfengine/ppkeys/localhost.pub "
+      register: cfengine_key
+    - name: Create the keys folder
+      file:
+        path: ./keys
+        state: directory
+      delegate_to: localhost
+    - name: Download the public key
+      become: true
+      ansible.builtin.fetch:
+        src: /var/cfengine/ppkeys/localhost.pub
+        dest: keys/root-{{ cfengine_key.stdout }}.pub
+        flat: true
+
+- hosts: hosts
+  tags:
+   - hosts
+  tasks:
+    - name: List public keys to trust
+      shell: "set -o pipefail && ls keys/root-* | xargs echo | sed -e 's/ /,/g'"
+      args:
+        executable: /bin/bash
+      delegate_to: localhost
+      register: hub_keys
+
+- hosts: hosts
+  tags:
+   - hosts
+  roles:
+    - role: "../.."
+      version: "3.17.0"
+      edition: "enterprise"
+      package: "client"
+      bootstrap: "192.168.100.90"
+      trust_key: "{{ hub_keys.stdout }}"
