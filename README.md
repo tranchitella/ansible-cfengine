@@ -14,7 +14,7 @@ This role requires pip in the Ansible control node.
 |`edition`|CFEngine edition (`community` or `enterprise`)|No|`community`|
 |`package`|Package to install (`client` or `hub`)|No|`client`|
 |`bootstrap`|If set, bootstraps CFEngine from the provided host|No|`""`|
-|`trust_key`|Path to key the hosts should trust|No|`""`|
+|`trust_keys`|Comma-separated paths to the keys the hosts should trust|No|`""`|
 
 ## Example Playbook
 
