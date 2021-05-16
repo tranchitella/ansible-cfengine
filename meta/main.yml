@@ -14,13 +14,10 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - all
-    - name: RedHat
-      versions:
-        - all
     - name: Fedora
       versions:
         - all
-    - name: Suse
+    - name: opensuse
       versions:
         - all
 
