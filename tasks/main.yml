@@ -1,20 +1,22 @@
 ---
-- name: cfengine | Check if CFEngine is installed
+- name: Check if CFEngine is installed
   stat:
     path: /var/cfengine/bin/cf-agent
   register: cfengin3_stat
 
-- name: cfengine | Check CFEngine version
+- name: Check CFEngine version
   shell: "set -o pipefail && /var/cfengine/bin/cf-agent --version | sed -e 's/^[^0-9]\\+//g' | head -n1"
+  args:
+    executable: /bin/bash
   register: cfengine_version
   when: cfengin3_stat.stat.exists
 
-- name: cfengine | Install cf-remote python package
+- name: Install cf-remote python package
   ansible.builtin.pip:
     name: cf-remote
   delegate_to: localhost
 
-- name: cfengine | Install CFEngine on the target host
+- name: Install CFEngine on the target host
   ansible.builtin.command:
     cmd: >
       cf-remote --version "{{ version }}" install --edition "{{ edition }}"
