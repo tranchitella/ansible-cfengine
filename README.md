@@ -31,7 +31,7 @@ Simple example to install the CFEengine client:
 ```yaml
 - hosts: servers
   roles:
-    - role: "cfengine.cfengine"
+    - role: "tranchitella.cfengine"
       version: 3.17.0
       edition: "enterprise"
       bootstrap: "10.0.0.1"
